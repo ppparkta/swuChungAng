@@ -23,16 +23,16 @@ public class Post {
     @NotNull
     private String body;
 
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="user_id")
-//    private Account user; //사용자랑 외래키 설정 해줘야함
-
     private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
     private Building building;
     @Enumerated(EnumType.STRING)
     private RequestStatus request;
+
+
+    @Column(name = "created_by_user_id") // 작성자 식별자(ID) 속성 추가
+    private String createdByUserId;
 
 
     public void updatePost(PostFromDto postFromDto) {
