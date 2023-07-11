@@ -89,4 +89,15 @@ public class PostService {
         return modelMapper.map(post, PostListDto.class);
     }
 
+    // 게시글 상태 변경 메소드
+
+    public void updatePostStatus(Long postId, RequestStatus status) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
+
+        post.setRequest(status);
+
+        postRepository.save(post);
+    }
 }
+

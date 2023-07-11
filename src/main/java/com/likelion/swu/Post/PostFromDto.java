@@ -13,7 +13,5 @@ public class PostFromDto {
     @NotNull(message = "제목은 필수 값 입니다.")
     private String title;
     private String body;
-    //private LocalDateTime date;
-   // private Building building;
-    //private RequestStatus request;
+    private RequestStatus request;
 }
