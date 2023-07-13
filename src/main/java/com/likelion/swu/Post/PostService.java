@@ -1,5 +1,7 @@
 package com.likelion.swu.Post;
 
+import com.likelion.swu.User.Account;
+import com.likelion.swu.User.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class PostService {
     private final ModelMapper mapper;
     private final PostRepository postRepository;
 
+    private final AccountRepository accountRepository;
+
     //게시글 생성
 //    public Post createPost(PostFromDto postFromDto,Building building, Long id) throws Exception {
 //        User user = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);;
@@ -32,16 +36,16 @@ public class PostService {
 //
 //        return postRepository.save(post);
 //    }
-    public Post createPost(PostFromDto postFromDto,Building building) throws Exception {
-        //User user = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);;
+    public Post createPost(PostFromDto postFromDto,Building building,String student_number) throws Exception {
 
+        Account account = accountRepository.findByStudentNumber(student_number);
         Post post = new Post();
         post.setTitle(postFromDto.getTitle());
         post.setBody(postFromDto.getBody());
         post.setDate(LocalDateTime.now());
         //post.setRequest(postFromDto.getRequest());
         post.setBuilding(building);
-        //post.setUser(user);
+        post.setAccount(account);
 
         return postRepository.save(post);
     }

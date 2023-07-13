@@ -38,9 +38,11 @@ public class PostController {
     @PostMapping(value = "/posts/{building}")
     public ResponseEntity<PostReturnDto> createPost(@RequestBody @Valid PostFromDto postFromDto,
                                                     @PathVariable("building") Building building, Principal principal) {
+
+
         try {
             System.out.println("user: " + principal.getName());
-            Post post = postService.createPost(postFromDto, building);
+            Post post = postService.createPost(postFromDto, building, principal.getName());
             // 게시글 작성 성공 시, 201 Created 상태코드와 생성된 게시글 정보 반환
             PostReturnDto postReturnDto = convertToDto(post); //생성한 객체 정보 다시 returndto로 넘김, 조회를 위해
             return ResponseEntity.status(HttpStatus.CREATED).body(postReturnDto);

@@ -30,6 +30,9 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private RequestStatus request;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Column(name = "created_by_user_id") // 작성자 식별자(ID) 속성 추가
     private String createdByUserId;
